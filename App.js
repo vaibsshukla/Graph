@@ -13,22 +13,23 @@ export default class App extends Component {
       </Text>
         <StackedBarChart
           data={{
-            labels: ['Test1', 'Test2', 'Test3'],
-            legend: ['L1', 'L2', 'L3', 'L4'],
+            labels: ['25', '20', '15', '10', '5'],
+            legend: ['In Bed', 'Asleep',],
             data: [
               [{ v: 5, c: '#0000' }, { v: 30, c: '#9932cc' }, { v: 3, c: 'red' }, { v: 60, c: '#a4b0be' }, { v: 3, c: 'green' }, { v: 5, c: '#9932cc' }, { v: 3, c: 'orange' }, { v: 60, c: '#a4b0be' }],
             ],
-            barColors: ['#dfe4ea', '#ced6e0', '#a4b0be', "#9932cc"],
+            barColors: ['#EC5D40', '#F19949',],
           }}
           width={Dimensions.get('window').width} // from react-native
           height={350}
           yAxisLabel={'$'}
           chartConfig={{
-            //backgroundColor: '#000f',
-            //backgroundGradientFrom: '#fb8c00',
-            //backgroundGradientTo: '#ffa726',
+            //backgroundColor: 'white',
+            backgroundGradientFrom: 'white',
+             backgroundGradientTo: 'white',
             decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+//            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            color: (opacity = 1) => `#9A9A9A`,
 
           }}
 

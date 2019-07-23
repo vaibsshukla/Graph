@@ -75,7 +75,7 @@ class StackedBarChart extends AbstractChart {
             y={height * 0.7 - i * 50}
           />
           <Text
-            fill="#fff"
+            fill="#9A9A9A"
             fontSize={16}
             x={width * 0.78}
             y={height * 0.76 - i * 50}
@@ -112,6 +112,11 @@ class StackedBarChart extends AbstractChart {
 
     return (
       <View style={style}>
+        {this.renderLegend({
+            ...config,
+            legend: data.legend,
+            colors: this.props.data.barColors
+          })}
         <Svg height={height} width={width}>
           {this.renderDefs({
             ...config,
@@ -170,11 +175,7 @@ class StackedBarChart extends AbstractChart {
 
             })}
           </G>
-          {this.renderLegend({
-            ...config,
-            legend: data.legend,
-            colors: this.props.data.barColors
-          })}
+          
         </Svg>
       </View>
     )
