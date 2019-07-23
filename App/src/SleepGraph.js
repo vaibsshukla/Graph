@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Dimensions } from 'react-native';
-import { StackedBarChart } from 'react-native-chart-kit'
+import { StackedBarChart } from '../../custom_modules/react-native-chart-kit'
 
 export default class App extends Component {
   render() {
