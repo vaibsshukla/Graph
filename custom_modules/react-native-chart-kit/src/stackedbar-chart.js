@@ -4,6 +4,7 @@ import { Svg, Rect, G, Text } from 'react-native-svg'
 import AbstractChart from './abstract-chart'
 
 
+
 const barWidth = 32
 
 class StackedBarChart extends AbstractChart {
@@ -16,7 +17,8 @@ class StackedBarChart extends AbstractChart {
       paddingTop,
       paddingRight,
       border,
-      colors
+      colors,
+      
     } = config
     return data.map((x, i) => {
       const barWidth = 10
@@ -90,7 +92,7 @@ class StackedBarChart extends AbstractChart {
   render() {
     const paddingTop = 15
     const paddingRight = 50
-    const { width, height, style = {}, data } = this.props
+    const { width, height, style = {}, data, noOfDaysInMonth } = this.props
     const { borderRadius = 0 } = style
     const config = {
       width,
@@ -132,7 +134,7 @@ class StackedBarChart extends AbstractChart {
           <G>
             {this.renderHorizontalLines({
               ...config,
-              count: 10,
+              count: 5,
               paddingTop
             })}
           </G>
@@ -141,9 +143,12 @@ class StackedBarChart extends AbstractChart {
               ...config,
               data: data.data,
               paddingTop,
+              count: noOfDaysInMonth,
               paddingRight
             })}
           </G>
+        
+          
 
           <G>
             {this.renderHorizontalLabels({
