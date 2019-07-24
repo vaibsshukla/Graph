@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 
 import {LinearGradient, Line, Text, Defs, Stop, View} from 'react-native-svg'
 
+
 class AbstractChart extends Component {
   calcScaler = data => {
     if (this.props.fromZero) {
@@ -41,14 +42,15 @@ class AbstractChart extends Component {
 
   renderHorizontalLines = config => {
     const {count, width, height, paddingTop, paddingRight} = config
+    console.log((height / count) * 1 + paddingTop)
     return [...new Array(count)].map((_, i) => {
       return (
         <Line
           key={Math.random()}
           x1={paddingRight}
-          y1={(height / count) * i + paddingTop}
+          y1={(height / count) * i + paddingTop-20}
           x2={width}
-          y2={(height / count) * i + paddingTop}
+          y2={(height / count) * i + paddingTop-20}
           stroke={this.props.chartConfig.color(0.2)}
           //strokeDasharray="5, 10"
           strokeDasharray=""
@@ -82,6 +84,7 @@ class AbstractChart extends Component {
       height,
       paddingTop,
       paddingRight,
+      paddingLeft,
       yLabelsOffset = 12
     } = config
     const decimalPlaces = this.props.chartConfig.decimalPlaces === undefined ? 2 : this.props.chartConfig.decimalPlaces
@@ -93,16 +96,18 @@ class AbstractChart extends Component {
       if (count === 1) {
         yLabel = `${data[0].toFixed(decimalPlaces)}${yAxisLabel}`
       } else {
-        const label = this.props.fromZero ?
-          (this.calcScaler(data) / (count - 1)) * i + Math.min(...data, 0) :
-          (this.calcScaler(data) / (count - 1)) * i + Math.min(...data)
+        const label = this.props.fromZero ? 2000:  2000*i
+
+        //  (this.calcScaler(data) / (count - 1)) * i + Math.min(...data, 0) :
+        //  (this.calcScaler(data) / (count - 1)) * i + Math.min(...data)
         yLabel = `${label.toFixed(decimalPlaces)}${yAxisLabel}`
       }
 
       return (
         <Text
           key={Math.random()}
-          x={paddingRight - yLabelsOffset}
+          x={paddingLeft - yLabelsOffset}
+          //   x={paddingRight - yLabelsOffset}
           textAnchor="end"
           y={(height * 3) / 4 - ((height - paddingTop) / count) * i + 12}
           fontSize={12}
@@ -177,12 +182,14 @@ class AbstractChart extends Component {
   // }
 
   renderVerticalLines = config => {
-    const {count, data, width, height, paddingTop, paddingRight} = config
+    const {count, data, width, height, paddingTop, paddingRight } = config
+    
     return [...new Array(count)].map((_, i) => {
    
-         
+        
    
         return (
+          
           <Line
             key={Math.random()}
             x1={Math.floor(
@@ -194,7 +201,7 @@ class AbstractChart extends Component {
             )}
             y2={i%5==0? height - height/6  + paddingTop :height - height / 4 + paddingTop}
             stroke={this.props.chartConfig.color(0.2)}
-            strokeDasharray= "5, 10"
+            strokeDasharray= {count-1 > i? "3,3":""}
             strokeWidth={1}
           />
         )

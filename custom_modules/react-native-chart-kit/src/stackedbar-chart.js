@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, } from 'react-native'
 import { Svg, Rect, G, Text } from 'react-native-svg'
 import AbstractChart from './abstract-chart'
 
@@ -18,6 +18,7 @@ class StackedBarChart extends AbstractChart {
       paddingRight,
       border,
       colors,
+      marginRight,
       
     } = config
     return data.map((x, i) => {
@@ -92,8 +93,9 @@ class StackedBarChart extends AbstractChart {
   render() {
     const paddingTop = 15
     const paddingRight = 50
+    const marginRight = 50
     const { width, height, style = {}, data, noOfDaysInMonth } = this.props
-    const { borderRadius = 0 } = style
+    const { borderRadius = 0,  } = style
     const config = {
       width,
       height
@@ -112,8 +114,26 @@ class StackedBarChart extends AbstractChart {
       console.log(JSON.stringify(actual))
     }
 
-    return (
-      <View style={style}>
+    return (<View style = { { flexDirection:'row-reverse', }}>
+      <View style = {{height : 400, width : 40}}>
+      <View style={[style,]}>
+      <Svg height={height} width={width}>
+      <G>
+            {this.renderHorizontalLabels({
+              ...config,
+              count: 5,
+              data: [0, border],
+              paddingTop,
+              
+              paddingLeft : 45 ,
+              //paddingRight : 400
+            })}
+          </G> 
+          </Svg>
+          </View>
+          </View>
+      <View style={[style,]}>
+
         {this.renderLegend({
             ...config,
             legend: data.legend,
@@ -144,21 +164,14 @@ class StackedBarChart extends AbstractChart {
               data: data.data,
               paddingTop,
               count: noOfDaysInMonth,
-              paddingRight
+              paddingRight,
+              marginRight,
             })}
           </G>
         
           
 
-          <G>
-            {this.renderHorizontalLabels({
-              ...config,
-              count: 10,
-              data: [0, border],
-              paddingTop,
-              paddingRight
-            })}
-          </G>
+          
           <G>
             {this.renderVerticalLabels({
               ...config,
@@ -183,6 +196,7 @@ class StackedBarChart extends AbstractChart {
           
         </Svg>
       </View>
+    </View>
     )
   }
 }
