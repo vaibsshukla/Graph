@@ -9,7 +9,7 @@
   "dependencies": {
     "moment": "^2.24.0",
     "react": "16.8.3",
-    "react-native": "0.59.9",
+    "react-native": "0.62.3",
     "react-native-chart-kit": "file:./custom_modules/react-native-chart-kit",
     "react-native-datepicker": "^1.7.2",
     "react-native-slideable-calendar-strip": "^0.3.2",
